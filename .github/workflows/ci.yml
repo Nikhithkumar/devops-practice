@@ -29,6 +29,10 @@ jobs:
         working-directory: server
         run: npm run lint -- --max-warnings=0
 
+      - name: Format backend
+        working-directory: server
+        run: npm run format
+
       - name: Install frontend dependencies
         working-directory: client
         run: npm ci
@@ -36,6 +40,10 @@ jobs:
       - name: Lint frontend
         working-directory: client
         run: npm run lint -- --max-warnings=0
+      
+      - name: Format frontend
+        working-directory: client
+        run: npm run format
 
       - name: Build backend image
         run: docker build -t backend ./server
