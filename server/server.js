@@ -34,9 +34,16 @@ app.use('*', (req, res) => {
   res.status(404).json({ message: 'Route not found' });
 });
 
+function encodeMongoURI() {
+  const { MONGO_USER, MONGO_PASS, MONGO_CLUSTER, MONGO_DB } = process.env;
+  const encodedPassword = encodeURIComponent(MONGO_PASS);
+  return `mongodb+srv://${MONGO_USER}:${encodedPassword}@${MONGO_CLUSTER}/${MONGO_DB}?retryWrites=true&w=majority`;
+}
+
+const MONGO_URI = encodeMongoURI();
 // Database connection
 mongoose
-  .connect(process.env.MONGO_URI, {
+  .connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
