@@ -39,8 +39,6 @@ function App() {
 
 
 
-  const unusedVariable = 'This variable is declared but not used';
-
   const handleAddTask = async (taskData) => {
     try {
       const response = await taskService.createTask(taskData);
@@ -52,7 +50,7 @@ function App() {
 
 
 
-      
+
       console.error('Error creating task:', err);
       return {
         success: false,
